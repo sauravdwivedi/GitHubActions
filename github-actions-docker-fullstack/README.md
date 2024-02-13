@@ -16,8 +16,8 @@ Copy project directory to a git repo and configure that repo from Actions tab.
 In github under Settings > Secrets and variables > actions, create Repository secrets:
 
 ```yaml
-DOCKERHUB_USERNAME: <username of your docker hub account>
-DOCKERHUB_TOKEN: <Access token generated from docker hub under My Account > Security > Access Tokens>
+DOCKERHUB_USERNAME: <<username of your docker hub account>>
+DOCKERHUB_TOKEN: <<Access token generated from docker hub under My Account > Security > Access Tokens>>
 ```
 
 ## Backend and Frontend apps

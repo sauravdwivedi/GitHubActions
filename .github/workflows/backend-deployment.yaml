@@ -29,13 +29,15 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-docker-fullstack-backend:latest
   docker-deploy:
+    needs: docker-push
     runs-on: self-hosted
     steps:
       - run: echo deployment under construction
   check-container-logs:
+    needs: [docker-push, docker-deploy]
     env:
-        ASTERISKS: '**************************************************'
+      ASTERISKS: '**************************************************'
     runs-on: self-hosted
     steps:
-      - run: echo ${{ env.ASTERISKS }}-$backend-logs-${{ env.ASTERISKS }}
+      - run: echo ${{ env.ASTERISKS }}-backend-logs-${{ env.ASTERISKS }}
       - run: docker logs `docker container ls | grep github-actions-backend | awk '{print $1}'`

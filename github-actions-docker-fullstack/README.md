@@ -9,18 +9,15 @@ gh repo clone sauravdwivedi/GitHubActions
 ```
 
 ## Setup git repo 
-Copy project directory to a git repo and configure that repo in Jenkins pipeline. Docker should be up and running.
+Copy project directory to a git repo and configure that repo from Actions tab.
 
 ## Setup Docker Hub credentials
 
-Install Docker Pipeline plugin in Jenkins, and setup docker hub credentials (Manage Jenkins -> Manage Plugins):
+In github under Settings > Secrets and variables > actions, create Repository secrets:
 
-- https://gcore.com/learning/building-docker-images-to-docker-hub-using-jenkins-pipelines/
-
-Modify Jenkinsfile accordingly:
-
-```json
-registry = "<Your docker hub username>/<Your repository name>"
+```yaml
+DOCKERHUB_USERNAME: <username of your docker hub account>
+DOCKERHUB_TOKEN: <Access token generated from docker hub under My Account > Security > Access Tokens>
 ```
 
 ## Backend and Frontend apps

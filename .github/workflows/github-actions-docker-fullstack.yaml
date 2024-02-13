@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - jenkins-docker-fullstack/backend/** 
-      - jenkins-docker-fullstack/backend/**
+      - jenkins-docker-fullstack/frontend/**
 jobs:
   docker-push:
     runs-on: ubuntu-latest

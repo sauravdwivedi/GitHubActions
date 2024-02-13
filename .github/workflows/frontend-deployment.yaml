@@ -32,7 +32,7 @@ jobs:
     needs: docker-push
     runs-on: self-hosted
     steps:
-      - run: echo deployment under construction
+      - run: docker compose -f github-actions-docker-fullstack/compose.yaml up -d frontend
   check-container-logs:
     needs: [docker-push, docker-deploy]
     env:

@@ -1,0 +1,27 @@
+services:
+  backend:
+    container_name: github-actions-backend
+    image: sauravdwivedi/github-actions-docker-fullstack-backend:latest
+    build: ./backend
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_APP=app
+      - FLASK_DEBUG=1
+      - PYTHONPATH=/src:/src/backend:/src/backend/controllers
+    networks:
+      - github-actions-docker-fullstack
+  frontend:
+    container_name: github-actions-frontend
+    image: sauravdwivedi/github-actions-docker-fullstack-frontend:latest
+    build: ./frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    networks:
+      - github-actions-docker-fullstack
+
+networks:
+  github-actions-docker-fullstack:
+    driver: bridge

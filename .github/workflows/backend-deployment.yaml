@@ -32,3 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo deployment under construction
+  check-container-logs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: docker logs `docker container ls | grep github-actions-backend | awk '{print $1}'`

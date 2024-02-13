@@ -1,4 +1,4 @@
-name: github-actions-docker-fullstack-backend-deployment
+name: backend-deployment
 
 on:
   push:

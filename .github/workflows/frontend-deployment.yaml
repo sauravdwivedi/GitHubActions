@@ -1,4 +1,4 @@
-name: github-actions-docker-fullstack-frontend-deployment
+name: frontend-deployment
 
 on:
   push:

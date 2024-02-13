@@ -20,6 +20,10 @@ DOCKERHUB_USERNAME: <<username of your docker hub account>>
 DOCKERHUB_TOKEN: <<Access token generated from docker hub under My Account > Security > Access Tokens>>
 ```
 
+## Setup self hosted runner
+
+- https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners
+
 ## Backend and Frontend apps
 
 If GitHubActions pipeline works fine, then backend and frontend apps run on

@@ -29,10 +29,13 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-docker-fullstack-frontend:latest
   docker-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - run: echo deployment under construction
   check-container-logs:
-    runs-on: ubuntu-latest
+    env:
+       ASTERISKS: '**************************************************'
+    runs-on: self-hosted
     steps:
+      - run: echo ${{ env.ASTERISKS }}-$frontend-logs-${{ env.ASTERISKS }}
       - run: docker logs `docker container ls | grep github-actions-frontend | awk '{print $1}'`

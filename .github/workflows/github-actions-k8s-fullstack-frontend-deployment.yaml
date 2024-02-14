@@ -23,14 +23,14 @@ jobs:
           context: ${{ env.WORK_DIR }}/frontend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-k8s-fullstack-frontend:latest
-  docker-deploy:
+  k8s-deploy:
     needs: docker-push
     runs-on: self-hosted
     steps:
       - run: kubectl create namespace frontend || true
       - run: kubectl apply -f github-actions-k8s-fullstack/k8s/frontend-deployment.yaml -n frontend
   check-container-logs:
-    needs: [docker-push, docker-deploy]
+    needs: [docker-push, k8s-deploy]
     env:
       ASTERISKS: '**************************************************'
     runs-on: self-hosted

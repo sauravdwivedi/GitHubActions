@@ -2,6 +2,21 @@
 
 <img src=pic.PNG alt="GitHubActions pipeline">
 
+## Architecture
+
+```mermaid
+flowchart LR
+    A(runner at host)
+    B(git hub actions)
+    C(docker registry)
+    D(docker cluster at host)
+    A --> |fetch job| B
+    B --> |receive job| A
+    A --> |push image| C
+    C --> |pull image| A
+    A --> |deploy image| D
+```
+
 ## Clone project 
 
 ```bash

@@ -9,7 +9,7 @@ flowchart LR
     A(runner at host)
     B(git hub actions)
     C(docker registry)
-    D(docker cluster at host)
+    D(docker engine at host)
     A --> |fetch job| B
     B --> |receive job| A
     A --> |push image| C

@@ -1,11 +1,11 @@
-name: frontend-deployment
+name: github-actions-k8s-fullstack-frontend-deployment
 
 on:
   push:
     branches:
       - main
     paths:
-      - github-actions-docker-fullstack/frontend/**
+      - github-actions-k8s-fullstack/frontend/**
 jobs:
   docker-push:
     runs-on: self-hosted
@@ -18,14 +18,15 @@ jobs:
       - name: Build, tag and push frontend image
         uses: docker/build-push-action@v5
         with:
-          context: github-actions-docker-fullstack/frontend
+          context: github-actions-k8s-fullstack/frontend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-docker-fullstack-frontend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-k8s-fullstack-frontend:latest
   docker-deploy:
     needs: docker-push
     runs-on: self-hosted
     steps:
-      - run: docker compose -f github-actions-docker-fullstack/compose.yaml up -d frontend
+      - run: kubectl create namespace frontend || true
+      - run: kubectl apply -f github-actions-k8s-fullstack/k8s/frontend-deployment.yaml -n frontend
   check-container-logs:
     needs: [docker-push, docker-deploy]
     env:
@@ -33,4 +34,4 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: echo ${{ env.ASTERISKS }}-frontend-logs-${{ env.ASTERISKS }}
-      - run: docker logs `docker container ls | grep github-actions-frontend | awk '{print $1}'`
+      - run: kubectl logs -n frontend `kubectl get pods -n frontend --no-headers -o custom-columns=:metadata.name | head -1`

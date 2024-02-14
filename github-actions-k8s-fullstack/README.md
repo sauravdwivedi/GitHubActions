@@ -31,7 +31,7 @@ Create alias for self host runner
 alias actions=/Users/sdwivedi/actions-runner/run.sh
 ```
 
-run actions in terminal for pipeline to pick up the job. Docker must be up and running on the host.
+run actions in terminal for pipeline to pick up the job. Docker and a kubernetes cluster must be up and running on the host.
 
 ## Backend and Frontend apps
 

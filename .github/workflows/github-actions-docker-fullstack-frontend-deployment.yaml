@@ -1,0 +1,36 @@
+name: github-actions-docker-fullstack-frontend-deployment
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - github-actions-docker-fullstack/frontend/**
+jobs:
+  docker-push:
+    runs-on: self-hosted
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build, tag and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: github-actions-docker-fullstack/frontend
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-docker-fullstack-frontend:latest
+  docker-deploy:
+    needs: docker-push
+    runs-on: self-hosted
+    steps:
+      - run: docker compose -f github-actions-docker-fullstack/compose.yaml up -d frontend
+  check-container-logs:
+    needs: [docker-push, docker-deploy]
+    env:
+      ASTERISKS: '**************************************************'
+    runs-on: self-hosted
+    steps:
+      - run: echo ${{ env.ASTERISKS }}-frontend-logs-${{ env.ASTERISKS }}
+      - run: docker logs `docker container ls | grep github-actions-frontend | awk '{print $1}'`

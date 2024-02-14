@@ -6,17 +6,17 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: jenkins-backend
+      app: github-actions-backend
   replicas: 1
   template:
     metadata:
       labels:
-        app: jenkins-backend
+        app: github-actions-backend
     spec:
       restartPolicy: Always
       containers:
-      - name: jenkins-backend
-        image: sauravdwivedi/jenkins-k8s-fullstack-backend:latest
+      - name: github-actions-backend
+        image: sauravdwivedi/github-actions-k8s-fullstack-backend:latest
         ports:
         - containerPort: 5000
 ---        
@@ -30,5 +30,5 @@ spec:
     protocol: TCP
     targetPort: 5000
   selector:
-    app: jenkins-backend
+    app: github-actions-backend
   type: LoadBalancer

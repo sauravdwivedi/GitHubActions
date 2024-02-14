@@ -8,13 +8,16 @@
 flowchart LR
     A(runner at host)
     B(git hub actions)
-    C(docker registry)
-    D(k8s cluster at host)
+    C(git hub repository)
+    D(docker registry)
+    E(k8s cluster at host)
     A --> |fetch job| B
+    B --> |fetch new commit| C
+    C --> |receive new commit| B
     B --> |receive job| A
-    A --> |push image| C
-    C --> |pull image| A
-    A --> |deploy image| D
+    A --> |push image| D
+    D --> |pull image| A
+    A --> |deploy image| E
 ```
 
 ## Clone project 

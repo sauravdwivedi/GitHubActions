@@ -9,7 +9,7 @@ flowchart LR
     A(runner at host)
     B(git hub actions)
     C(git hub repository)
-    D(docker registry)
+    D[(docker registry)]
     E(k8s cluster at host)
     A --> |fetch job| B
     B --> |fetch new commit| C
@@ -46,10 +46,10 @@ DOCKERHUB_TOKEN: <<Access token generated from docker hub under My Account > Sec
 Create alias for self host runner
 
 ```bash
-alias actions=/Users/sdwivedi/actions-runner/run.sh
+alias runner=/Users/sdwivedi/actions-runner/run.sh
 ```
 
-run actions in terminal for pipeline to pick up the job. Docker and a kubernetes cluster must be up and running on the host.
+run runner in terminal for pipeline to pick up the job. Docker and a kubernetes cluster must be up and running on the host.
 
 ## Backend and Frontend apps
 

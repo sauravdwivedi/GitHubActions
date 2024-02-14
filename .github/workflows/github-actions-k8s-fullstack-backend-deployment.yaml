@@ -23,14 +23,14 @@ jobs:
           context: ${{ env.WORK_DIR }}/backend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-k8s-fullstack-backend:latest
-  docker-deploy:
+  k8s-deploy:
     needs: docker-push
     runs-on: self-hosted
     steps:
       - run: kubectl create namespace backend || true
       - run: kubectl apply -f github-actions-k8s-fullstack/k8s/backend-deployment.yaml -n backend
   check-container-logs:
-    needs: [docker-push, docker-deploy]
+    needs: [docker-push, k8s-deploy]
     env:
       ASTERISKS: '**************************************************'
     runs-on: self-hosted
